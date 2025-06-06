@@ -1,0 +1,118 @@
+Submission
+Membangun Proyek Machine Learning
+
+Submission ini mencakup dua tahap utama, yaitu Clustering dan Klasifikasi, dengan kriteria serta urutan kerja sebagai berikut.
+
+Kriteria 1: Memuat Dataset dan Melakukan Exploratory Data Analysis (EDA)
+1. Menampilkan dataset menggunakan function head().
+2. Menampilkan informasi dataset dengan info().
+3. Menampilkan statistik deskriptif dataset dengan menjalankan describe() untuk mendapatkan ringkasan data.
+Reject (0 pts):
+1. Tidak menampilkan dataset menggunakan function head().
+2. Tidak menampilkan informasi dataset dengan info().
+3. Tidak menampilkan statistik deskriptif dataset dengan menjalankan describe() untuk mendapatkan ringkasan data.
+4. Cell code tidak memiliki output pada kode yang seharusnya menampilkan output atau mengalami error.
+Basic (2 pts):
+1. Menampilkan dataset menggunakan function head().
+2. Menampilkan informasi dataset dengan info().
+3. Menampilkan statistik deskriptif dataset dengan menjalankan describe() untuk mendapatkan ringkasan data.
+Skilled (3 pts):
+1. Semua ketentuan pada Basic terpenuhi.
+2. Menampilkan matriks korelasi.
+3. Menampilkan histogram untuk semua kolom dalam dataset, baik itu bertipe numerik maupun kategorikal.
+Advanced (4 pts):
+1. Semua ketentuan pada Skilled terpenuhi.
+2. Visualisasi yang dilakukan tidak memiliki label yang overlap.
+
+Kriteria 2: Pembersihan dan Pra Pemrosesan Data
+1. Mengecek dataset menggunakan isnull().sum() dan duplicated().sum().
+2. Melakukan feature scaling menggunakan MinMaxScaler() atau StandardScalar() untuk fitur numerik.
+3. Melakukan feature encoding menggunakan pd.get_dummies() atau LabelEncoder() untuk fitur kategorikal.
+4. Melakukan drop pada kolom yang memiliki keterangan ID seperti TransactionID, AccountID, DeviceID,  IPAddress, MerchantID 
+Reject (0 pts):
+1. Tidak mengecek dataset menggunakan isnull().sum() dan duplicated().sum().
+2. Tidak melakukan feature scaling menggunakan MinMaxScaler() atau StandardScalar() untuk fitur numerik.
+3. Tidak melakukan feature encoding menggunakan pd.get_dummies() atau LabelEncoder() untuk fitur kategorikal.
+4. Tidak melakukan drop pada kolom yang memiliki keterangan ID.
+Basic (2 pts):
+1. Mengecek dataset menggunakan isnull().sum() dan duplicated().sum().
+2. Melakukan feature scaling menggunakan MinMaxScaler() atau StandardScalar() untuk fitur numerik.
+3. Melakukan feature encoding menggunakan pd.get_dummies() atau LabelEncoder() untuk fitur kategorikal.
+4. Melakukan drop pada kolom yang memiliki keterangan ID seperti TransactionID, AccountID, DeviceID,  IPAddress, MerchantID.
+Skilled (3 pts):
+1. Semua ketentuan pada kategori Basic terpenuhi.
+2. Menangani data yang hilang (bisa menggunakan dropna() atau metode imputasi fillna()).
+3. Menghapus data duplikat menggunakan drop_duplicates().
+Advanced (4 pts):
+1. Semua ketentuan pada kategori Skilled terpenuhi.
+2. Melakukan Handling Outlier menggunakan metode drop atau imputasi. 
+3. Melakukan binning data berdasarkan kondisi rentang nilai pada fitur numerik, lakukan pada satu sampai dua fitur numerik. Silahkan lakukan encode hasil binning tersebut menggunakan LabelEncoder atau get_dummies.
+ 
+Kriteria 3: Membangun Model Clustering
+1. Menggunakan dataset yang sudah dilakukan preprocessing.
+2. Melakukan visualisasi Elbow Method untuk menentukan jumlah cluster terbaik menggunakan KElbowVisualizer().
+3. Menggunakan algoritma K-Means Clustering dengan sklearn.cluster.KMeans().
+4. Menjalankan cell code joblib.dump() dengan nama model_clustering agar reviewer dapat secara otomatis menilai evaluasi model anda.
+Reject (0 pts):
+1. Tidak menggunakan dataset yang sudah dilakukan preprocessing.
+2. Tidak melakukan visualisasi Elbow Method menggunakan KElbowVisualizer().
+3. Tidak menggunakan algoritma K-Means Clustering.
+4. Tidak menjalankan cell code joblib.dump() dengan nama model_clustering.
+Basic (2 pts):
+1. Melakukan visualisasi Elbow Method menggunakan KElbowVisualizer().
+2. Menggunakan algoritma K-Means Clustering
+3. Menjalankan cell code joblib.dump() dengan nama model_clustering.
+Skilled (3 pts):
+1. Semua ketentuan pada kategori Basic terpenuhi.
+2. Menghitung dan menampilkan nilai Silhouette Score.
+3. Membuat visualisasi hasil clustering
+Advanced (4 pts):
+1. Semua ketentuan pada kategori Skilled terpenuhi.
+2. Membangun model menggunakan PCA.
+Simpan model PCA sebagai perbandingan dengan menjalankan cell code ini joblib.dump(model,"PCA_model_clustering.h5").
+
+Kriteria 4: Interpretasi Hasil Clustering
+1. Menampilkan hasil clustering dalam bentuk visualisasi.
+2. Menjelaskan karakteristik tiap cluster berdasarkan rentangnya.
+3. Mengekspor data training dari proses preprocessing beserta data hasil clustering dan berikan nama untuk kolom tersebut yaitu Target
+Reject (0 pts):
+1. Tidak menjelaskan karakteristik tiap cluster berdasarkan rentangnya.
+2. Tidak mengekspor data training dari proses preprocessing beserta data hasil clustering dan tidak mengatur nama untuk kolom tersebut yaitu Target.
+Basic (2 pts):
+1. Menampilkan analisis deskriptif minimal mean, min, dan max untuk fitur numerik dan mode untuk fitur kategorikal. 
+2. Menjelaskan karakteristik tiap cluster berdasarkan hasil proses agregasi.
+3. Mengekspor data training dari proses preprocessing beserta data hasil clustering dan berikan nama untuk kolom tersebut yaitu Target.
+Skilled (3 pts):
+1. Semua ketentuan pada kategori Basic terpenuhi.
+2. Mengembalikan data yang telah di encode dan scale dengan menggunakan metode inverse_transform().
+3. Menampilkan analisis deskriptif minimal mean, min, dan max untuk fitur numerik dan mode untuk fitur kategorikal yang telah di-inverse
+4. Interpretasi kembali berdasarkan data yang sudah di-inverse.
+Advanced (4 pts):
+1. Semua ketentuan pada kategori Skilled terpenuhi. 
+2. Mengintegrasikan kembali data yang telah di-inverse dengan hasil cluster(kolom target).
+3. Menyimpan data hasil inverse dan kolom Target kedalam file data_clustering_inverse.csv
+
+Kriteria 5: Membangun Model Klasifikasi
+1. Menggunakan train_test_split() untuk melakukan pembagian dataset.
+2. Membangun model dengan algoritma Decision Tree.
+3. Menjalankan cell code joblib.dump() dengan nama decision_tree_model.h5 agar reviewer dapat secara otomatis menilai evaluasi model anda.
+Rejected (0 pts):
+1. Tidak menggunakan penamaan terformat pada target dari dataset yaitu Target.
+2. Tidak menggunakan train_test_split() untuk melakukan pembagian dataset.
+3. Tidak membangun model dengan algoritma Decision Tree.
+4. Tidak menjalankan cell code joblib.dump() dengan nama decision_tree_model.h5.
+Basic (2 pts):
+1. Menggunakan penamaan terformat pada target dari dataset hasil clustering yaitu Target.
+2. Apabila menerapkan kriteria advanced di kriteria 4, gunakan data_clustering_inverse.csv
+3. Menggunakan train_test_split() untuk melakukan pembagian dataset.
+4. Membangun model dengan algoritma Decision Tree.
+5. Menjalankan cell code joblib.dump() dengan nama decision_tree_model.h5
+Skilled (3 pts):
+1. Semua ketentuan pada kategori Basic terpenuhi.
+2. Mencoba lebih dari satu algoritma klasifikasi selain Decision Tree.
+3. Menampilkan hasil evaluasi akurasi, presisi, recall, dan F1-Score pada seluruh algoritma yang sudah dibuat.
+4. Menjalankan cell code joblib.dump() dengan nama explore_<Nama Algoritma>_classification pada model yang memiliki evaluasi terbaik.
+Advanced (4 Poin):
+1. Semua ketentuan pada kategori Skilled terpenuhi.
+2. Melakukan hyperparameter tuning pada model dengan hasil evaluasi  paling kecil.
+3. Menjalankan cell code joblib.dump() dengan nama tuning_classification pada model yang memiliki evaluasi terbaik.
