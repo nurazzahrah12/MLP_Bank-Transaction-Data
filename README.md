@@ -20,71 +20,95 @@
 
 ## Deskripsi Proyek
 
-Proyek ini mencakup dua tahap utama:
-1. **Clustering**: Mengelompokkan transaksi berdasarkan pola menggunakan K-Means.
-2. **Klasifikasi**: Memprediksi cluster (target) berdasarkan fitur transaksi menggunakan Decision Tree dan Random Forest.
+Proyek ini mencakup dua pendekatan utama:
+1. **Clustering (Unsupervised Learning)** untuk mengelompokkan transaksi berdasarkan pola.
+2. **Klasifikasi (Supervised Learning)** untuk memprediksi cluster dari fitur transaksi.
 
-Model dan pipeline dibangun berdasarkan kriteria dari `Kriteria Submission.txt`, dengan tujuan memenuhi level evaluasi tertinggi (**Advanced**) dalam setiap kategori.
+Proyek dikembangkan sesuai kriteria penilaian untuk mencapai level **Advanced**, mencakup preprocessing lengkap, EDA, model training, interpretasi, dan dokumentasi.
 
 ---
 
-## Langkah-langkah yang Dilakukan
+## Langkah-langkah Proyek
 
 ### 1. Exploratory Data Analysis (EDA)
-- Melihat struktur dan ringkasan data (`head()`, `info()`, `describe()`)
-- Visualisasi: korelasi, histogram, label yang rapi
+- Visualisasi korelasi, histogram, distribusi target
+- Visualisasi rapi tanpa label overlap
 
 ### 2. Preprocessing
-- Pembersihan null dan duplikat
+- Cek null & duplikat (`isnull()`, `duplicated()`)
 - Scaling (MinMaxScaler)
-- Encoding (LabelEncoder/get_dummies)
-- Drop kolom ID
-- Handling outlier dan binning
+- Encoding (LabelEncoder)
+- Drop ID-related columns
+- Handling outlier dan binning (disertai encoding hasil binning)
 
 ### 3. Clustering
-- Visualisasi Elbow Method (`KElbowVisualizer`)
-- Algoritma: `KMeans`, dilanjutkan PCA
-- Evaluasi: `Silhouette Score`
-- Model disimpan:
-  - `model_clustering.h5`
-  - `PCA_model_clustering.h5`
+- Metode: `KMeans`, evaluasi dengan `Silhouette Score`
+- Menentukan jumlah cluster optimal menggunakan `KElbowVisualizer`
+- Menyimpan model clustering (`model_clustering.h5`)
+- Model PCA disimpan: `PCA_model_clustering.h5` ✅
 
-### 4. Interpretasi Clustering
-- Deskripsi tiap cluster (min, max, mean)
-- Inverse scaling & encoding
-- Simpan hasil akhir: `data_clustering_inverse.csv`
+### 4. Interpretasi Hasil Clustering
+- Inverse transform fitur & label
+- Agregasi per klaster (mean, min, max, modus)
+- Simpan hasil akhir `data_clustering_inverse.csv`
+- Deskripsi karakteristik tiap klaster
 
 ### 5. Klasifikasi
-- Target: `Target` hasil clustering
-- Split data (`train_test_split`)
-- Model:
-  - Decision Tree → `decision_tree_model.h5`
-  - Random Forest → `explore_random_forest_classification.h5`
-  - Tuning → `tuning_classification.h5`
+- Dataset: hasil clustering dengan kolom `Target`
+- Algoritma:
+  - Decision Tree
+  - Random Forest
+- Hyperparameter tuning dilakukan
 - Evaluasi: Akurasi, Presisi, Recall, F1-score
+- Simpan model terbaik (`tuning_classification.h5`)
 
 ---
 
 ## File Penting
 
-| Nama File | Deskripsi |
-|-----------|-----------|
-| `bank_transactions_data_edited.csv` | Dataset awal yang telah dibersihkan |
-| `data_clustering.csv` | Data hasil clustering |
-| `data_clustering_inverse.csv` | Data clustering setelah inverse transform |
-| `model_clustering.h5` | Model KMeans akhir |
+| File | Deskripsi |
+|------|-----------|
+| `bank_transactions_data_edited.csv` | Dataset awal |
+| `data_clustering.csv` | Hasil clustering |
+| `data_clustering_inverse.csv` | Hasil inverse clustering |
+| `model_clustering.h5` | Model KMeans |
 | `PCA_model_clustering.h5` | Model clustering dengan PCA |
-| `decision_tree_model.h5` | Model klasifikasi Decision Tree |
-| `explore_random_forest_classification.h5` | Model klasifikasi terbaik |
-| `tuning_classification.h5` | Model klasifikasi setelah tuning |
+| `decision_tree_model.h5` | Model klasifikasi awal |
+| `explore_random_forest_classification.h5` | Model RF terbaik |
+| `tuning_classification.h5` | Model klasifikasi ter-tuning |
+
+---
+
+## Umpan Balik Reviewer
+
+**Semua kriteria utama terpenuhi dengan baik**:
+- EDA menyeluruh dengan visualisasi rapi
+- Preprocessing lengkap: scaling, encoding, handling outlier, binning
+- Clustering dan interpretasi klaster disertai penyimpanan model
+- Klasifikasi lengkap dengan tuning dan evaluasi
+- Dokumentasi Jupyter Notebook sangat rapi
+
+**Saran untuk pengembangan lebih lanjut:**
+- Lakukan Grid Search, Random Search, atau Bayesian Optimization untuk tuning lebih mendalam
+- Tambahkan Cross Validation untuk hasil evaluasi yang stabil
+- Analisis error untuk memahami kesalahan prediksi
+- Coba beberapa algoritma baru untuk pembanding
+- Evaluasi performa pada data nyata
+- Tambahkan `data storytelling` agar hasil lebih komunikatif
 
 ---
 
 ## Cara Menjalankan
 
-1. Buka Jupyter Notebook atau Google Colab
-2. Jalankan:
+1. Buka Jupyter Notebook / Google Colab
+2. Jalankan dua file utama:
    - `[Clustering]_Submission_Akhir_BMLP_*.ipynb`
    - `[Klasifikasi]_Submission_Akhir_BMLP_*.ipynb`
-3. Pastikan package berikut terinstal:
-   - `pandas`, `sklearn`, `matplotlib`, `seaborn`, `joblib`, `yellowbrick`
+3. Pastikan library berikut tersedia:
+   - `pandas`, `numpy`, `sklearn`, `matplotlib`, `seaborn`, `joblib`, `yellowbrick`
+
+---
+
+## Kesimpulan
+
+Proyek ini menunjukkan pemahaman mendalam tentang supervised dan unsupervised learning. Dengan EDA yang rapi, preprocessing yang lengkap, serta evaluasi yang jelas, proyek ini siap dikembangkan lebih lanjut menuju level machine learning lanjutan.
